@@ -13,6 +13,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<CardHome> cardHome = [CardHome(), CardHome(), CardHome()];
   @override
   Widget build(BuildContext context) {
     final heightDevice = MediaQuery.of(context).size.height;
@@ -65,19 +66,23 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: heightDevice * 0.03,
             ),
-            Container(
-              height: heightDevice * 0.27,
-              margin: EdgeInsets.only(bottom: 30),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  MoreCard(),
-                  CardHome(),
-                ],
-              ),
+            Row(
+              //crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MoreCard(),
+                Container(
+                  width: widthDevice * 0.83,
+                  height: heightDevice * 0.27,
+                  margin: EdgeInsets.only(bottom: 30),
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: cardHome.length,
+                      itemBuilder: (context, index) {
+                        return cardHome[index];
+                      }),
+                ),
+              ],
             ),
             Expanded(child: GeneralDetaisHome()),
           ],
